@@ -1,0 +1,25 @@
+#!/bin/bash
+
+root=$([[ -d $2 ]] && echo $2 || echo "./captured")
+
+if [[ $1 == "compile" ]]; then
+	output="./Timelapse_$(date "+%d_%m_%G_%R:%S").mp4";
+	ffmpeg -f image2 -pattern_type glob -framerate 12 -i "$root/*.png" $output && echo "Compiled successfully." || echo "Failed to compile timelapse.";
+	exit;
+fi
+
+if [[ $1 == "record" ]]; then
+	while true; do
+		output="$root/Screenshot_$(date "+%d_%m_%G_%R:%S").png";
+		import -silent -window root $output
+		echo "Captured $output";
+		sleep 2;
+	done
+	exit;
+fi
+
+echo -e "Small timelapse ultility that just wrap imagemagick, ffmpeg
+	record		to start record
+	compile		to compile into video
+
+Every parameter accept second argument which is directory to save screenshot and compile from (default to ./captured)";
