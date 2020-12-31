@@ -13,3 +13,5 @@ Small timelapse ultility that just wrap imagemagick, ffmpeg
 
 Every parameter accept second argument which is directory to save screenshot and compile from (default to ./captured)
 ```
+
+**You might also need to chmod it to be excutable !**
